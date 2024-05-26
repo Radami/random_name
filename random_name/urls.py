@@ -21,5 +21,5 @@ from restaurants import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("restaurant/", views.Restaurant.as_view()),
+    path("api/restaurant/", views.Restaurant.as_view()),
 ]

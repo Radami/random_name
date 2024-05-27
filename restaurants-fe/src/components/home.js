@@ -10,7 +10,7 @@ class Button extends Component {
     }
 
     render() {
-        return <button onClick={this.props.onClick} className="new">{this.props.name}</button>
+        return <button onClick={this.props.onClick} className="new btn btn-primary rounded-pill">{this.props.name}</button>
     }
 }
 
@@ -30,16 +30,21 @@ class Home extends Component {
     render() {
         
         return (
-            <div class="container">
-                <div class="col-6 bg-primary-subtle justify-content-center">
-                    <div class="row">
-                        <h3>{this.state.name}</h3>
-                    </div>
-                    <div class="row justify-content-center align-items-center">
-                        <div class="text-center">
-                            <Button name="New" onClick={this.getNewName}/>
+            <div class="d-flex flex-column min-vh-100">
+                <div class="container-fluid d-flex flex-column flex-grow-1 justify-content-center">
+                    <div class="row flex-grow-1">
+                        <div class="col d-flex flex-column justify-content-end text-center mt-auto mb-auto">
+                            <div class="w-50 container-md py-3 rounded-pill bg-primary-subtle">
+                                <h3>{this.state.name}</h3>
+                            </div>
+                            <div class="justify-content-center align-items-center m-3">
+                                <div class="text-center">
+                                    <Button name="New name" onClick={this.getNewName}/>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <div class="row flex-grow-1"></div>
                 </div>
             </div>
             

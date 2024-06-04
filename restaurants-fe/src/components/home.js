@@ -31,9 +31,9 @@ class Home extends Component {
         
         return (
             <div class="d-flex flex-column min-vh-100">
-                <div class="container-fluid w-50 d-flex flex-column flex-grow-1 justify-content-center">
+                <div class="container-fluid d-flex flex-column col-lg-5 flex-grow-1 justify-content-center bg-light">
                     <div class="row flex-grow-1">
-                        <div class="col d-flex flex-column justify-content-end text-center mt-auto mb-auto">
+                        <div class="col d-flex flex-column justify-content-end text-center my-auto">
                             <div class="container-md py-3 rounded-pill bg-primary-subtle">
                                 <h3>{this.state.name}</h3>
                             </div>

@@ -1,5 +1,6 @@
-import { Fragment, useEffect } from 'react';
+import { useEffect } from 'react';
 import './App.css';
+import Footer from "./components/footer";
 import Header from "./components/header";
 import Home from "./components/home";
 
@@ -11,10 +12,11 @@ function App() {
 
 
   return (
-    <Fragment>
+    <div class="d-flex flex-column min-vh-100 bg-dark">
       <Header />
       <Home />
-    </Fragment>
+      <Footer />
+    </div>
   );
 }
 

@@ -10,7 +10,7 @@ class Button extends Component {
     }
 
     render() {
-        return <button onClick={this.props.onClick} className="new btn btn-primary rounded-pill">{this.props.name}</button>
+        return <button onClick={this.props.onClick} className="new btn btn-warning rounded-pill">{this.props.name}</button>
     }
 }
 
@@ -30,10 +30,9 @@ class Home extends Component {
     render() {
         
         return (
-            <div class="d-flex flex-column min-vh-100">
-                <div class="container-fluid d-flex flex-column col-lg-5 flex-grow-1 justify-content-center bg-light">
+                <main class="container-fluid d-flex flex-column col-lg-5 flex-grow-1 justify-content-center">
                     <div class="row flex-grow-1">
-                        <div class="col d-flex flex-column justify-content-end text-center my-auto">
+                        <div class="col d-flex flex-column justify-content-center text-center">
                             <div class="container-md py-3 rounded-pill bg-primary-subtle">
                                 <h3>{this.state.name}</h3>
                             </div>
@@ -45,9 +44,8 @@ class Home extends Component {
                         </div>
                     </div>
                     <div class="row flex-grow-1"></div>
-                </div>
-            </div>
-            
+                </main>
+           
         )
     }
 }

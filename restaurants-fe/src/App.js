@@ -6,10 +6,7 @@ import Home from "./components/home";
 
 function App() {
   useEffect( () => {
-
   })
-
-
 
   return (
     <div class="d-flex flex-column min-vh-100 bg-dark">

@@ -9,7 +9,7 @@ function App() {
   })
 
   return (
-    <div class="d-flex flex-column min-vh-100 bg-dark">
+    <div className="d-flex flex-column min-vh-100 bg-dark">
       <Header />
       <Home />
       <Footer />

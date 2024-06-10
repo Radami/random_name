@@ -13,8 +13,8 @@ function TextButton({handleClick, buttonText, buttonClass}) {
 
 function IconButton({handleClick, buttonClass, iconClass}) {
     return (
-        <button onClick={handleClick} class={buttonClass}>
-            <i class={iconClass} ></i>
+        <button onClick={handleClick} className={buttonClass}>
+            <i className={iconClass} ></i>
         </button>
     );
 }
@@ -45,17 +45,17 @@ export default function Home () {
 
 
     return (
-        <main class="container-fluid d-flex flex-column col-md-6 flex-grow-1 justify-content-center">
-            <div class="row flex-grow-1 justify-content-center">
-                <div class="col d-flex flex-column justify-content-center ">
-                    <div class="container-md py-3 rounded-pill bg-primary-subtle text-center">
+        <main className="container-fluid d-flex flex-column col-md-6 flex-grow-1 justify-content-center">
+            <div className="row flex-grow-1 justify-content-center">
+                <div className="col d-flex flex-column justify-content-center ">
+                    <div className="container-md py-3 rounded-pill bg-primary-subtle text-center">
                         <h3>{history[history.length-1]}</h3>
                     </div>
-                    <div class="row m-3">
-                        <div class="d-flex col justify-content-end px-0">
+                    <div className="row m-3">
+                        <div className="d-flex col justify-content-end px-0">
                             <IconButton buttonClass="btn btn-primary rounded-circle" iconClass="bi bi-skip-backward-fill" handleClick={onBack}/>
                         </div>
-                        <div class="d-flex col justify-content-start px-3">
+                        <div className="d-flex col justify-content-start px-3">
                             {/* <TextButton buttonText="Surprise me" buttonClass="btn btn-warning rounded-pill" handleClick={getNewName} />*/}
                             <IconButton buttonClass="btn btn-warning rounded-circle" iconClass="bi bi-arrow-clockwise" handleClick={getNewName} />                       
                         </div>
@@ -63,7 +63,7 @@ export default function Home () {
                     </div>
                 </div>
             </div>
-            <div class="row flex-grow-1"></div>
+            <div className="row flex-grow-1"></div>
         </main>
     );
 }

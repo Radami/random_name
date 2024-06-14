@@ -1,4 +1,4 @@
-function Header() {
+function Footer() {
   return(
     <footer className="footer mt-auto py-3 text-white">
         <div className="container text-center">
@@ -8,4 +8,4 @@ function Header() {
   );
 }
   
-export default Header;
+export default Footer;

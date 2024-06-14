@@ -1,23 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from 'react';
-
 import { API_URL } from "../constants";
-
-function TextButton({handleClick, buttonText, buttonClass}) {
-    return (
-        <button onClick={handleClick} className={buttonClass}>
-            {buttonText}
-        </button>
-    );
-}
-
-function IconButton({handleClick, buttonClass, iconClass}) {
-    return (
-        <button onClick={handleClick} className={buttonClass}>
-            <i className={iconClass} ></i>
-        </button>
-    );
-}
+import IconButton from "./iconButton";
 
 export default function Home () {
   
@@ -59,7 +43,6 @@ export default function Home () {
                             {/* <TextButton buttonText="Surprise me" buttonClass="btn btn-warning rounded-pill" handleClick={getNewName} />*/}
                             <IconButton buttonClass="btn btn-warning rounded-circle" iconClass="bi bi-arrow-clockwise" handleClick={getNewName} />                       
                         </div>
-                        
                     </div>
                 </div>
             </div>

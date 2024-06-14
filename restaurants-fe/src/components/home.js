@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from 'react';
 import { API_URL } from "../constants";
+import Collapsible from "./collapsible";
 import IconButton from "./iconButton";
 
 export default function Home () {
@@ -43,6 +44,7 @@ export default function Home () {
                             {/* <TextButton buttonText="Surprise me" buttonClass="btn btn-warning rounded-pill" handleClick={getNewName} />*/}
                             <IconButton buttonClass="btn btn-warning rounded-circle" iconClass="bi bi-arrow-clockwise" handleClick={getNewName} />                       
                         </div>
+                        <Collapsible />
                     </div>
                 </div>
             </div>

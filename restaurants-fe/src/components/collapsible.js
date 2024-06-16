@@ -8,7 +8,6 @@ function Collapsible() {
 
     return (
         <div className="container">
-            
             <button {...getToggleProps()} className="btn btn-primary btn-sm">
                 {isExpanded ? <i className="bi bi-caret-up-fill"></i> : <i className="bi bi-caret-down-fill"></i>}
             </button>

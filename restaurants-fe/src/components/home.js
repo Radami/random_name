@@ -6,17 +6,23 @@ import IconButton from "./iconButton";
 
 export default function Home () {
   
-    const [history, setHistory] = useState([]);
+    const [locations, setLocations] = useState([]);
+    const [foods, setFoods] = useState([]);
+    const [places, setPlaces] = useState([]);
 
     function getNewName () {
         axios.get(API_URL).then(res => {
-            setHistory([...history, res.data.generated_name]);
+            setLocations([...locations, res.data.location]);
+            setFoods([...foods, res.data.food]);
+            setPlaces([...places, res.data.place]);
         })
     }
 
     function onBack() {
-        if (history.length > 1) {
-            setHistory(history.slice(0, history.length-1));
+        if (locations.length > 1 && foods.length > 1 && places.length > 1) {
+            setLocations(locations.slice(0, locations.length-1));
+            setFoods(foods.slice(0, foods.length-1));
+            setPlaces(places.slice(0, places.length-1));
         }
     }
 
@@ -25,8 +31,10 @@ export default function Home () {
     }, []);
 
     useEffect(() => {
-        console.log(history);
-    }, [history]);
+        console.log(locations);
+        console.log(foods);
+        console.log(places);
+    }, [locations, foods, places]);
 
 
     return (
@@ -34,7 +42,7 @@ export default function Home () {
             <div className="row flex-grow-1 justify-content-center">
                 <div className="col d-flex flex-column justify-content-center ">
                     <div className="container-md py-3 rounded-pill bg-primary-subtle text-center">
-                        <h3>{history[history.length-1]}</h3>
+                        <h3>{locations[locations.length-1]} {foods[foods.length-1]} {places[places.length-1]}</h3>
                     </div>
                     <div className="row m-3">
                         <div className="d-flex col justify-content-end px-0">

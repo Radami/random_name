@@ -2,8 +2,6 @@ import React from 'react';
 
 
 function CheckBox({name, text, isChecked, setChecked}) {
-    
-    //const [isChecked, setChecked] = useState(true);
 
     const handleCheckboxChange = () => {
         setChecked(prevState => !prevState);

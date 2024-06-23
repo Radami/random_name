@@ -14,6 +14,15 @@ export default function Home () {
     const [newFood, setNewFood] = useState(true)
     const [newPlace, setNewPlace] = useState(true);
 
+    const checkBoxProps = {
+        isLocationChecked: newLocation,
+        setLocationChecked: setNewLocation,
+        isFoodChecked: newFood,
+        setFoodChecked: setNewFood,
+        isPlaceChecked: newPlace,
+        setPlaceChecked: setNewPlace,
+    }
+
     function getNewName () {
 
         let params = {
@@ -63,9 +72,7 @@ export default function Home () {
                             {/* <TextButton buttonText="Surprise me" buttonClass="btn btn-warning rounded-pill" handleClick={getNewName} />*/}
                             <IconButton buttonClass="btn btn-warning rounded-circle" iconClass="bi bi-arrow-clockwise" handleClick={getNewName} />                       
                         </div>
-                        <Collapsible isLocationChecked={newLocation} setLocationChecked={setNewLocation} 
-                                      isFoodChecked={newFood} setFoodChecked={setNewFood} 
-                                      isPlaceChecked={newPlace} setPlaceChecked={setNewPlace}/>
+                        <Collapsible {...checkBoxProps}/>
                     </div>
                 </div>
             </div>

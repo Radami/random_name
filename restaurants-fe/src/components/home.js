@@ -5,11 +5,13 @@ import Collapsible from "./collapsible";
 import IconButton from "./iconButton";
 
 export default function Home () {
-  
+
+    // Used for history and to be able to fix each component of the name
     const [locations, setLocations] = useState([]);
     const [foods, setFoods] = useState([]);
     const [places, setPlaces] = useState([]);
 
+    // Checkbox states
     const [newLocation, setNewLocation] = useState(true);
     const [newFood, setNewFood] = useState(true)
     const [newPlace, setNewPlace] = useState(true);
@@ -30,12 +32,14 @@ export default function Home () {
             food: newFood ? null : foods[foods.length - 1],
             place: newPlace ? null : places[places.length - 1],
         }
-
-        axios.get(API_URL, {params: params}).then(res => {
-            setLocations([...locations, res.data.location]);
-            setFoods([...foods, res.data.food]);
-            setPlaces([...places, res.data.place]);
-        })
+        
+        if (params.location == null || params.food == null || params.places != null) {
+            axios.get(API_URL, {params: params}).then(res => {
+                setLocations([...locations, res.data.location]);
+                setFoods([...foods, res.data.food]);
+                setPlaces([...places, res.data.place]);
+            })
+        }
     }
 
     function onBack() {
@@ -66,11 +70,10 @@ export default function Home () {
                     </div>
                     <div className="row m-3">
                         <div className="d-flex col justify-content-end px-0">
-                            <IconButton buttonClass="btn btn-primary rounded-circle" iconClass="bi bi-skip-backward-fill" handleClick={onBack}/>
+                            <IconButton buttonClass="btn btn-lg btn-primary rounded-circle" iconClass="bi bi-skip-backward-fill" handleClick={onBack}/>
                         </div>
                         <div className="d-flex col justify-content-start px-3">
-                            {/* <TextButton buttonText="Surprise me" buttonClass="btn btn-warning rounded-pill" handleClick={getNewName} />*/}
-                            <IconButton buttonClass="btn btn-warning rounded-circle" iconClass="bi bi-arrow-clockwise" handleClick={getNewName} />                       
+                            <IconButton buttonClass="btn btn-warning rounded-circle fs-4" iconClass="bi bi-arrow-clockwise" handleClick={getNewName} />                       
                         </div>
                         <Collapsible {...checkBoxProps}/>
                     </div>

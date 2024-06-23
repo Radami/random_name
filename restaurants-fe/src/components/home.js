@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from 'react';
+import { useCollapse } from 'react-collapsed';
 import { API_URL } from "../constants";
 import Collapsible from "./collapsible";
 import IconButton from "./iconButton";
@@ -16,6 +17,8 @@ export default function Home () {
     const [newFood, setNewFood] = useState(true)
     const [newPlace, setNewPlace] = useState(true);
 
+    const { getToggleProps, getCollapseProps, isExpanded } = useCollapse();
+
     const checkBoxProps = {
         isLocationChecked: newLocation,
         setLocationChecked: setNewLocation,
@@ -23,6 +26,9 @@ export default function Home () {
         setFoodChecked: setNewFood,
         isPlaceChecked: newPlace,
         setPlaceChecked: setNewPlace,
+        getToggleProps: getToggleProps,
+        getCollapseProps: getCollapseProps,
+        isExpanded: isExpanded
     }
 
     function getNewName () {
@@ -33,7 +39,7 @@ export default function Home () {
             place: newPlace ? null : places[places.length - 1],
         }
         
-        if (params.location == null || params.food == null || params.places != null) {
+        if (params.location == null || params.food == null || params.place == null) {
             axios.get(API_URL, {params: params}).then(res => {
                 setLocations([...locations, res.data.location]);
                 setFoods([...foods, res.data.food]);
@@ -68,12 +74,20 @@ export default function Home () {
                     <div className="container-md py-3 rounded-pill bg-primary-subtle text-center">
                         <h3>{locations[locations.length-1]} {foods[foods.length-1]} {places[places.length-1]}</h3>
                     </div>
-                    <div className="row m-3">
-                        <div className="d-flex col justify-content-end px-0">
-                            <IconButton buttonClass="btn btn-lg btn-primary rounded-circle" iconClass="bi bi-skip-backward-fill" handleClick={onBack}/>
+                    <div className="row mt-3">
+                        <div className="d-flex col align-items-end">
+                        <div className="container">
+                            <button {...getToggleProps()} className="btn btn-primary btn-sm">
+                            {isExpanded ? <i className="bi bi-caret-up-fill"></i> : <i className="bi bi-caret-down-fill"></i>}
+                            </button>
+                        </div>
+                        </div>
+                        <div className="d-flex col justify-content-center px-0">
+                            <IconButton buttonClass="btn btn-lg btn-primary rounded-circle me-2" iconClass="bi bi-skip-backward-fill" handleClick={onBack}/>
+                            <IconButton buttonClass="btn btn-warning rounded-circle fs-4 ms-2" iconClass="bi bi-arrow-clockwise" handleClick={getNewName} />                       
                         </div>
                         <div className="d-flex col justify-content-start px-3">
-                            <IconButton buttonClass="btn btn-warning rounded-circle fs-4" iconClass="bi bi-arrow-clockwise" handleClick={getNewName} />                       
+                           
                         </div>
                         <Collapsible {...checkBoxProps}/>
                     </div>

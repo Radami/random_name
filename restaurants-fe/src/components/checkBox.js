@@ -8,9 +8,9 @@ function CheckBox({name, text, isChecked, setChecked}) {
       };
 
     return (
-        <div class="col form-check">
-            <input class="form-check-input" type="checkbox" value="" id={name} checked={isChecked} onChange={handleCheckboxChange}/>  
-            <label class="form-check-label" for={name}>
+        <div className="col form-check">
+            <input className="form-check-input" type="checkbox" value="" id={name} checked={isChecked} onChange={handleCheckboxChange}/>  
+            <label className="form-check-label" htmlFor={name}>
                 {text}
             </label>
         </div>

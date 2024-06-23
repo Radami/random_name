@@ -29,17 +29,17 @@ class Restaurant(APIView):
         generated_name = None
         data = request.query_params
         if "location" in data and data["location"] is not None:
-            locations = list(data["location"])
+            locations = [data["location"]]
         else:
             locations = Location.objects.all()
 
         if "food" in data and data["food"] is not None:
-            foods = list(data["food"])
+            foods = [data["food"]]
         else:
             foods = FoodType.objects.all()
 
         if "place" in data and data["place"] is not None:
-            places = list(data["place"])
+            places = [data["place"]]
         else:
             places = PlaceType.objects.all()
 

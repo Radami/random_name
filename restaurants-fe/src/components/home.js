@@ -10,8 +10,19 @@ export default function Home () {
     const [foods, setFoods] = useState([]);
     const [places, setPlaces] = useState([]);
 
+    const [newLocation, setNewLocation] = useState(true);
+    const [newFood, setNewFood] = useState(true)
+    const [newPlace, setNewPlace] = useState(true);
+
     function getNewName () {
-        axios.get(API_URL).then(res => {
+
+        let params = {
+            location: newLocation ? null: locations[locations.length - 1],
+            food: newFood ? null : foods[foods.length - 1],
+            place: newPlace ? null : places[places.length - 1],
+        }
+
+        axios.get(API_URL, {params: params}).then(res => {
             setLocations([...locations, res.data.location]);
             setFoods([...foods, res.data.food]);
             setPlaces([...places, res.data.place]);
@@ -52,7 +63,9 @@ export default function Home () {
                             {/* <TextButton buttonText="Surprise me" buttonClass="btn btn-warning rounded-pill" handleClick={getNewName} />*/}
                             <IconButton buttonClass="btn btn-warning rounded-circle" iconClass="bi bi-arrow-clockwise" handleClick={getNewName} />                       
                         </div>
-                        <Collapsible />
+                        <Collapsible isLocationChecked={newLocation} setLocationChecked={setNewLocation} 
+                                      isFoodChecked={newFood} setFoodChecked={setNewFood} 
+                                      isPlaceChecked={newPlace} setPlaceChecked={setNewPlace}/>
                     </div>
                 </div>
             </div>

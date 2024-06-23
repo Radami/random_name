@@ -77,7 +77,7 @@ export default function Home () {
                     <div className="row mt-3">
                         <div className="d-flex col align-items-end">
                         <div className="container">
-                            <button {...getToggleProps()} className="btn btn-primary btn-sm">
+                            <button {...getToggleProps()} className="btn btn-secondary btn-sm">
                             {isExpanded ? <i className="bi bi-caret-up-fill"></i> : <i className="bi bi-caret-down-fill"></i>}
                             </button>
                         </div>

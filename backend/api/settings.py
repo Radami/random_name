@@ -54,7 +54,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
 ]
 
-ROOT_URLCONF = "random_name.urls"
+ROOT_URLCONF = "api.urls"
 
 TEMPLATES = [
     {
@@ -72,7 +72,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "random_name.wsgi.application"
+WSGI_APPLICATION = "api.wsgi.application"
 
 
 # Database

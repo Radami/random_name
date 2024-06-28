@@ -1,0 +1,48 @@
+services:
+  backend:
+    image: random_name-backend:latest
+    build: ./backend
+    container_name: backend
+    env_file:
+      - ./.env
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/:/srv/app
+    command: bash -c "python manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      - db
+
+  frontend:
+    image: random_name-frontend:latest
+    build: ./frontend
+    container_name: frontend
+    env_file:
+      - ./.env
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./frontend/:/srv/app
+      - node_modules:/srv/app/node_modules
+    command: bash -c "npm start"
+    depends_on:
+      - backend
+
+  db:
+    image: postgres:16.1-alpine
+    container_name: dev-db
+    expose:
+      - "5232"
+    ports:
+      - "5232:5232"
+    environment:
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_USER=random_name_user
+      - POSTGRES_DB=random_name
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    command: -p 5232
+
+volumes:
+  node_modules:
+  postgres_data:

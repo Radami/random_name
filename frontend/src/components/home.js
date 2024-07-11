@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useCollapse } from 'react-collapsed';
 import { API_URL } from "../constants";
 import Collapsible from "./collapsible";
@@ -31,7 +31,39 @@ export default function Home () {
         isExpanded: isExpanded
     }
 
-    function getNewName () {
+    function generateRandomName(params) {
+        if (params.location == null || params.food == null || params.place == null) {
+            return axios.get(API_URL, {params: params})
+            .then(res => {
+                const { location, food, place } = res.data;
+                console.log(`Location: ${location}, Food: ${food}, Place: ${place}`);
+                return { location, food, place };
+            })
+            .catch(error => {
+                console.error("There was an error!", error);
+            });
+        }
+    }
+
+    const initialLoad = useCallback(async () => {
+        
+        let params = {
+            location: null,
+            food:  null,
+            place: null,
+        }
+
+        try {
+            const { location, food, place } = await generateRandomName(params);
+            setLocations([location]);
+            setFoods([food]);
+            setPlaces([place]);
+        } catch (error) {
+            console.error("There was an error!", error);
+        }
+    }, [setLocations, setFoods, setPlaces])
+
+    const getNewName = useCallback(() =>  {
 
         let params = {
             location: newLocation ? null: locations[locations.length - 1],
@@ -46,7 +78,7 @@ export default function Home () {
                 setPlaces([...places, res.data.place]);
             })
         }
-    }
+    }, [newLocation, newFood, newPlace,  locations, foods, places, setLocations, setFoods, setPlaces] )
 
     function onBack() {
         if (locations.length > 1 && foods.length > 1 && places.length > 1) {
@@ -57,8 +89,8 @@ export default function Home () {
     }
 
     useEffect(() => {
-        getNewName();
-    }, []);
+        initialLoad();
+    }, [initialLoad]);
 
     useEffect(() => {
         console.log(locations);

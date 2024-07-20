@@ -31,52 +31,46 @@ export default function Home () {
         isExpanded: isExpanded
     }
 
-    function generateRandomName(params) {
-        if (params.location == null || params.food == null || params.place == null) {
-            return axios.get(API_URL, {params: params})
-            .then(res => {
-                const { location, food, place } = res.data;
-                console.log(`Location: ${location}, Food: ${food}, Place: ${place}`);
-                return { location, food, place };
-            })
-            .catch(error => {
-                console.error("There was an error!", error);
-            });
+    function buildParams(location = null, food = null, place = null) {
+        return {
+            location: location,
+            food:  food,
+            place: place,
         }
     }
 
     const initialLoad = useCallback(async () => {
         
-        let params = {
-            location: null,
-            food:  null,
-            place: null,
-        }
-
         try {
-            const { location, food, place } = await generateRandomName(params);
-            setLocations([location]);
-            setFoods([food]);
-            setPlaces([place]);
+            axios.get(API_URL, buildParams()).then(res => {
+                setLocations([res.data.location]);
+                setFoods([res.data.food]);
+                setPlaces([res.data.place]);
+            });
         } catch (error) {
-            console.error("There was an error!", error);
+            console.error("Initial load - error from backend", error);
         }
     }, [setLocations, setFoods, setPlaces])
 
     const getNewName = useCallback(() =>  {
 
-        let params = {
-            location: newLocation ? null: locations[locations.length - 1],
-            food: newFood ? null : foods[foods.length - 1],
-            place: newPlace ? null : places[places.length - 1],
-        }
+        let params = buildParams(
+            newLocation ? null: locations[locations.length - 1],
+            newFood ? null : foods[foods.length - 1],
+            newPlace ? null : places[places.length - 1],
+        )
         
         if (params.location == null || params.food == null || params.place == null) {
-            axios.get(API_URL, {params: params}).then(res => {
-                setLocations([...locations, res.data.location]);
-                setFoods([...foods, res.data.food]);
-                setPlaces([...places, res.data.place]);
-            })
+            try {
+                axios.get(API_URL, {params: params}).then(res => {
+                    setLocations([...locations, res.data.location]);
+                    setFoods([...foods, res.data.food]);
+                    setPlaces([...places, res.data.place]);
+                })
+            }
+            catch (error) {
+                console.error("getNewName - error from backend", error);
+            }
         }
     }, [newLocation, newFood, newPlace,  locations, foods, places, setLocations, setFoods, setPlaces] )
 
